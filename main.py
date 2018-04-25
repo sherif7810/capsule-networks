@@ -1,5 +1,4 @@
 import torch
-from torch.autograd import Variable
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
@@ -8,10 +7,11 @@ from torchvision import datasets, transforms
 
 class Capsule(nn.Module):
     """It wraps a capsule."""
+
     def __init__(self):
         super(Capsule, self).__init__()
 
-        self.b = Variable(torch.zeros(1024).float())
+        self.b = torch.zeros(1024).float()
         self.softmax = nn.Softmax()
 
     def forward(self, u_hat):
@@ -25,6 +25,7 @@ class Capsule(nn.Module):
 
 class Net(nn.Module):
     """Capsule network."""
+
     def __init__(self, caps_num):
         super(Net, self).__init__()
 
@@ -73,4 +74,3 @@ if __name__ == '__main__':
     # caps_net = Net(10)
 
     # for batch_idx, (data, target) in enumerate(train_loader):
-    #     data, target = Variable(data), Variable(target)
